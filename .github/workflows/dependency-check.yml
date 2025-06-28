@@ -1,0 +1,22 @@
+name: "Dependency Check"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+  - cron: "0 0 * * 0"
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Audit
+      run: cargo install cargo-audit --locked && cargo audit --deny warnings
