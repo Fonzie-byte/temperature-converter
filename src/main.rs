@@ -1,4 +1,5 @@
 use std::{env, fmt};
+use temperature_converter::{from_celsius, from_fahrenheit};
 
 fn main() {
     let original_temperature = match env::args().nth(1) {
@@ -40,28 +41,4 @@ impl fmt::Display for System {
             System::Fahrenheit => write!(f, "°F"),
         }
     }
-}
-
-/// Converts the given degrees Fahrenheit to Celsius and returns it as a float.
-fn from_fahrenheit(fahrenheit: f64) -> f64 {
-    5.0 / 9.0 * (fahrenheit - 32.0)
-}
-
-/// Converts the given degrees Celsius to Fahrenheit and returns it as a float.
-fn from_celsius(celsius: f64) -> f64 {
-    celsius * 1.8 + 32.0
-}
-
-#[test]
-fn correctly_converts_fahrenheit_to_celsius() {
-    assert_eq!(from_fahrenheit(97.5), 36.38888888888889);
-    assert_eq!(from_fahrenheit(32.0), 0.0);
-    assert_eq!(from_fahrenheit(-40.0), -40.0);
-}
-
-#[test]
-fn correctly_converts_celsius_to_fahrenheit() {
-    assert_eq!(from_celsius(100.0), 212.0);
-    assert_eq!(from_celsius(0.0), 32.0);
-    assert_eq!(from_celsius(-40.0), -40.0);
 }
