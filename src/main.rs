@@ -1,4 +1,7 @@
-use std::{env, fmt};
+mod temperature_system;
+
+use crate::temperature_system::TemperatureSystem;
+use std::env;
 use temperature_converter::{from_celsius, from_fahrenheit};
 
 fn main() {
@@ -11,34 +14,20 @@ fn main() {
 
     let (original_system, new_system) = match env::args().nth(2) {
         Some(argument) => match argument.to_ascii_lowercase().as_str() {
-            "celsius" | "c" => (System::Celsius, System::Fahrenheit),
-            "fahrenheit" | "f" => (System::Fahrenheit, System::Celsius),
+            "celsius" | "c" => (TemperatureSystem::Celsius, TemperatureSystem::Fahrenheit),
+            "fahrenheit" | "f" => (TemperatureSystem::Fahrenheit, TemperatureSystem::Celsius),
             _ => panic!("The second argument must be either 'celsius' or 'fahrenheit'!"),
         },
         None => panic!("Provide two arguments; a number, and either 'celsius' or 'fahrenheit'!"),
     };
 
     let new_temperature = match original_system {
-        System::Fahrenheit => from_fahrenheit(original_temperature),
-        System::Celsius => from_celsius(original_temperature),
+        TemperatureSystem::Fahrenheit => from_fahrenheit(original_temperature),
+        TemperatureSystem::Celsius => from_celsius(original_temperature),
     };
 
     println!(
         "{}{} equals {}{}",
         original_temperature, original_system, new_temperature, new_system
     );
-}
-
-enum System {
-    Celsius,
-    Fahrenheit,
-}
-
-impl fmt::Display for System {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self {
-            System::Celsius => write!(f, "°C"),
-            System::Fahrenheit => write!(f, "°F"),
-        }
-    }
 }
