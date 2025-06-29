@@ -1,8 +1,5 @@
-mod temperature_system;
-
-use crate::temperature_system::TemperatureSystem;
 use std::env;
-use temperature_converter::{from_celsius, from_fahrenheit};
+use temperature_converter::{TemperatureSystem, from_celsius, from_fahrenheit};
 
 fn main() {
     let original_temperature = match env::args().nth(1) {

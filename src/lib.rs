@@ -1,3 +1,5 @@
+use std::fmt;
+
 /// Converts the given degrees Fahrenheit to Celsius and returns it as a float.
 ///
 /// # Examples
@@ -23,4 +25,18 @@ pub fn from_fahrenheit(fahrenheit: f64) -> f64 {
 /// ```
 pub fn from_celsius(celsius: f64) -> f64 {
     celsius * 1.8 + 32.0
+}
+
+pub enum TemperatureSystem {
+    Celsius,
+    Fahrenheit,
+}
+
+impl fmt::Display for TemperatureSystem {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            TemperatureSystem::Celsius => write!(f, "°C"),
+            TemperatureSystem::Fahrenheit => write!(f, "°F"),
+        }
+    }
 }
