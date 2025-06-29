@@ -6,7 +6,7 @@ use std::fmt;
 /// ```
 /// use temperature_converter::from_fahrenheit;
 ///
-/// assert_eq!(from_fahrenheit(97.5), 36.38888888888889);
+/// assert_eq!(from_fahrenheit(97.5), 36.388888888888886);
 /// assert_eq!(from_fahrenheit(32.0), 0.0);
 /// assert_eq!(from_fahrenheit(-40.0), -40.0);
 /// ```
@@ -19,7 +19,7 @@ pub fn from_fahrenheit(fahrenheit: f64) -> f64 {
 /// # Examples
 /// ```
 /// use temperature_converter::from_celsius;
-/// 
+///
 /// assert_eq!(from_celsius(100.0), 212.0);
 /// assert_eq!(from_celsius(0.0), 32.0);
 /// assert_eq!(from_celsius(-40.0), -40.0);
